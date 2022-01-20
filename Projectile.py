@@ -15,7 +15,7 @@ class Projectile(pygame.sprite.Sprite):
         )
 
         self.pos = [source[0], source[1]]
-        self.movementVector = [target[0], target[1]]
+        self.movement_vector = [target[0], target[1]]
         self.speed = speed
         self.lifetime = lifetime
         self.createdAt = pygame.time.get_ticks()
@@ -24,8 +24,8 @@ class Projectile(pygame.sprite.Sprite):
         if pygame.time.get_ticks() > self.createdAt + self.lifetime:
             self.kill()
 
-        self.pos[0] += self.movementVector[0] * self.speed * tDelta
-        self.pos[1] += self.movementVector[1] * self.speed * tDelta
+        self.pos[0] += self.movement_vector[0] * self.speed * tDelta
+        self.pos[1] += self.movement_vector[1] * self.speed * tDelta
         self.rect.topleft = self.pos
         if (
                 self.pos[0] > surfaceSize[0] or self.pos[0] < 0
