@@ -2,7 +2,7 @@ import math
 
 import pygame
 
-from Projectile import Projectile
+from projectile import Projectile
 
 
 def normalize_vector(vector):
@@ -25,8 +25,8 @@ class Enemy(pygame.sprite.Sprite):
         self.pos = list(pos)
         self.movement_vector = [0, 0]
         self.movementSpeed = 1.5
-        self.lastShot = pygame.time.get_ticks()
-        self.weaponCooldown = 1500
+        self.last_shot = pygame.time.get_ticks()
+        self.weapon_cooldown = 1500
 
     def move(self, enemies, player_coordinates, t_delta):
         self.movement_vector = (player_coordinates[0] - self.pos[0],
@@ -52,9 +52,9 @@ class Enemy(pygame.sprite.Sprite):
 
     def shoot(self, player_coordinates):
         current_time = pygame.time.get_ticks()
-        if current_time - self.lastShot > self.weaponCooldown:
+        if current_time - self.last_shot > self.weapon_cooldown:
             direction = (player_coordinates[0] - self.pos[0], player_coordinates[1] - self.pos[1])
-            self.lastShot = current_time
+            self.last_shot = current_time
             self.projectiles.add(
                 Projectile(
                     self.pos,

@@ -1,13 +1,14 @@
 import random
+import sys
 
 import pygame
 
-from Enemy import Enemy
-from Player import Player
+from enemy import Enemy
+from player import Player
 
 pygame.init()
-SCREEN_SIZE = (800, 600)
-screen = pygame.display.set_mode(SCREEN_SIZE)
+screen_size = width, height = 800, 600
+screen = pygame.display.set_mode(screen_size)
 score_font = pygame.font.Font("fonts/UpheavalPro.ttf", 30)
 health_font = pygame.font.Font("fonts/OmnicSans.ttf", 50)
 health_render = health_font.render('z', True, pygame.Color('red'))
@@ -71,20 +72,20 @@ def process_mouse(mouse, hero):
 
 
 def game_loop():
-    done = False
     hero = pygame.sprite.GroupSingle(Player(screen.get_size()))
     enemies = pygame.sprite.Group()
     last_enemy = pygame.time.get_ticks()
     score = 0
 
-    while hero.sprite.alive and not done:
+    while True:
         keys = pygame.key.get_pressed()
         mouse = pygame.mouse.get_pressed()
         current_time = pygame.time.get_ticks()
 
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return True
+            if event.type == pygame.QUIT or not hero.sprite.alive:
+                return
+
         screen.fill(pygame.Color('white'))
 
         process_keys(keys, hero)
@@ -94,13 +95,13 @@ def game_loop():
         if last_enemy < current_time - 200 and len(enemies) < 50:
             spawn_side = random.random()
             if spawn_side < 0.25:
-                enemies.add(Enemy((0, random.randint(0, SCREEN_SIZE[1]))))
+                enemies.add(Enemy((0, random.randint(0, screen_size[1]))))
             elif spawn_side < 0.5:
-                enemies.add(Enemy((SCREEN_SIZE[0], random.randint(0, SCREEN_SIZE[1]))))
+                enemies.add(Enemy((screen_size[0], random.randint(0, screen_size[1]))))
             elif spawn_side < 0.75:
-                enemies.add(Enemy((random.randint(0, SCREEN_SIZE[0]), 0)))
+                enemies.add(Enemy((random.randint(0, screen_size[0]), 0)))
             else:
-                enemies.add(Enemy((random.randint(0, SCREEN_SIZE[0]), SCREEN_SIZE[1])))
+                enemies.add(Enemy((random.randint(0, screen_size[0]), screen_size[1])))
             last_enemy = current_time
 
         score += move_entities(hero, enemies, clock.get_time() / 17)
@@ -111,7 +112,7 @@ def game_loop():
             screen.blit(health_render, (15 + hp * 35, 0))
         score_render = score_font.render(str(score), True, pygame.Color('black'))
         score_rect = score_render.get_rect()
-        score_rect.right = SCREEN_SIZE[0] - 20
+        score_rect.right = screen_size[0] - 20
         score_rect.top = 20
         screen.blit(score_render, score_rect)
 
@@ -119,16 +120,7 @@ def game_loop():
         clock.tick(120)
 
 
-done = game_loop()
-while not done:
-    keys = pygame.key.get_pressed()
-    mouse = pygame.mouse.get_pressed()
-    current_time = pygame.time.get_ticks()
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-
-    if keys[pygame.K_r]:
-        done = game_loop()
-pygame.quit()
+if __name__ == '__main__':
+    game_loop()
+    pygame.quit()
+    sys.exit()

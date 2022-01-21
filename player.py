@@ -3,7 +3,7 @@ from typing import List
 
 import pygame
 
-import Weapon
+from weapon import Weapon, Pistol, Shotgun, MachineGun
 
 
 def normalize_vector(vector):
@@ -20,7 +20,10 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.Surface([8, 8])
         self.image.fill(pygame.Color('green'))
-        self.rect = self.image.get_rect(x=screen_size[0] // 2, y=screen_size[1] // 2)
+        self.rect = self.image.get_rect(
+            x=screen_size[0] // 2,
+            y=screen_size[1] // 2
+        )
 
         self.pos = [screen_size[0] // 2, screen_size[1] // 2]
         self.health = 3
@@ -28,9 +31,9 @@ class Player(pygame.sprite.Sprite):
         self.movement_vector = [0, 0]
         self.movement_speed = 3
         self.available_weapons: List[Weapon] = [
-            Weapon.Pistol(cooldown=250),
-            Weapon.Shotgun(),
-            Weapon.MachineGun()
+            Pistol(cooldown=250),
+            Shotgun(),
+            MachineGun()
         ]
         self.equipped_weapon = self.available_weapons[0]
 
