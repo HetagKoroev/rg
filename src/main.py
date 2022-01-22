@@ -3,12 +3,13 @@ import sys
 
 import pygame
 
-from enemy import Enemy
-from player import Player
+from settings import SCREEN_SIZE, WIDTH, HEIGHT
+from entities.enemy import Enemy
+from entities.player import Player
 
 pygame.init()
-screen_size = width, height = 800, 600
-screen = pygame.display.set_mode(screen_size)
+
+screen = pygame.display.set_mode(SCREEN_SIZE)
 score_font = pygame.font.Font("fonts/UpheavalPro.ttf", 30)
 health_font = pygame.font.Font("fonts/OmnicSans.ttf", 50)
 health_render = health_font.render('z', True, pygame.Color('red'))
@@ -95,13 +96,13 @@ def game_loop():
         if last_enemy < current_time - 200 and len(enemies) < 50:
             spawn_side = random.random()
             if spawn_side < 0.25:
-                enemies.add(Enemy((0, random.randint(0, screen_size[1]))))
+                enemies.add(Enemy((0, random.randint(0, HEIGHT))))
             elif spawn_side < 0.5:
-                enemies.add(Enemy((screen_size[0], random.randint(0, screen_size[1]))))
+                enemies.add(Enemy((WIDTH, random.randint(0, HEIGHT))))
             elif spawn_side < 0.75:
-                enemies.add(Enemy((random.randint(0, screen_size[0]), 0)))
+                enemies.add(Enemy((random.randint(0, WIDTH), 0)))
             else:
-                enemies.add(Enemy((random.randint(0, screen_size[0]), screen_size[1])))
+                enemies.add(Enemy((random.randint(0, WIDTH), HEIGHT)))
             last_enemy = current_time
 
         score += move_entities(hero, enemies, clock.get_time() / 17)
@@ -110,9 +111,13 @@ def game_loop():
         # Health and score render
         for hp in range(hero.sprite.health):
             screen.blit(health_render, (15 + hp * 35, 0))
-        score_render = score_font.render(str(score), True, pygame.Color('black'))
+        score_render = score_font.render(
+            str(score),
+            True,
+            pygame.Color('black')
+        )
         score_rect = score_render.get_rect()
-        score_rect.right = screen_size[0] - 20
+        score_rect.right = WIDTH - 20
         score_rect.top = 20
         screen.blit(score_render, score_rect)
 

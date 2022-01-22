@@ -1,4 +1,5 @@
 import pygame
+from pygame.surface import Surface, SurfaceType
 
 
 class Projectile(pygame.sprite.Sprite):
@@ -33,5 +34,5 @@ class Projectile(pygame.sprite.Sprite):
         ):
             self.kill()
 
-    def render(self, surface):
+    def render(self, surface: Surface | SurfaceType):
         surface.blit(self.image, self.pos)

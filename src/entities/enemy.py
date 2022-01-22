@@ -2,7 +2,7 @@ import math
 
 import pygame
 
-from projectile import Projectile
+from entities.projectile import Projectile
 
 
 def normalize_vector(vector):

@@ -4,7 +4,7 @@ from abc import abstractmethod, ABC
 
 import pygame
 
-from projectile import Projectile
+from entities.projectile import Projectile
 
 
 class Weapon(ABC):

@@ -1,9 +1,8 @@
 import math
-from typing import List
 
 import pygame
 
-from weapon import Weapon, Pistol, Shotgun, MachineGun
+from entities.weapon import Weapon, Pistol, Shotgun, MachineGun
 
 
 def normalize_vector(vector):
@@ -30,7 +29,7 @@ class Player(pygame.sprite.Sprite):
         self.alive = True
         self.movement_vector = [0, 0]
         self.movement_speed = 3
-        self.available_weapons: List[Weapon] = [
+        self.available_weapons: list[Weapon] = [
             Pistol(cooldown=250),
             Shotgun(),
             MachineGun()
