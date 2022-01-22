@@ -1,4 +1,4 @@
-### Rouge-like, top-down, survivor игра
+## Rouge-like, top-down, survivor игра в сеттинге dark-fantasy
 
 ### Перед запуском проекта необходимо установить зависимости
 ```
