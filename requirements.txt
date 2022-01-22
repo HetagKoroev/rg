@@ -1,2 +1,4 @@
+isort==5.10.1
+mypy==0.931
 pygame==2.1.2
 pylint==2.12.2
