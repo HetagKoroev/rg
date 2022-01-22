@@ -1,4 +1,5 @@
 import pygame
+from pygame.surface import Surface, SurfaceType
 
 
 class Projectile(pygame.sprite.Sprite):
@@ -15,23 +16,23 @@ class Projectile(pygame.sprite.Sprite):
         )
 
         self.pos = [source[0], source[1]]
-        self.movementVector = [target[0], target[1]]
+        self.movement_vector = [target[0], target[1]]
         self.speed = speed
         self.lifetime = lifetime
         self.createdAt = pygame.time.get_ticks()
 
-    def move(self, surfaceSize, tDelta):
+    def move(self, surface_size, t_delta):
         if pygame.time.get_ticks() > self.createdAt + self.lifetime:
             self.kill()
 
-        self.pos[0] += self.movementVector[0] * self.speed * tDelta
-        self.pos[1] += self.movementVector[1] * self.speed * tDelta
+        self.pos[0] += self.movement_vector[0] * self.speed * t_delta
+        self.pos[1] += self.movement_vector[1] * self.speed * t_delta
         self.rect.topleft = self.pos
         if (
-                self.pos[0] > surfaceSize[0] or self.pos[0] < 0
-                or self.pos[1] > surfaceSize[1] or self.pos[1] < 0
+                self.pos[0] > surface_size[0] or self.pos[0] < 0
+                or self.pos[1] > surface_size[1] or self.pos[1] < 0
         ):
             self.kill()
 
-    def render(self, surface):
+    def render(self, surface: Surface | SurfaceType):
         surface.blit(self.image, self.pos)
