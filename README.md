@@ -1,3 +1,6 @@
+### Rouge-like, top-down, survivor игра
+
+### Перед запуском проекта необходимо установить зависимости
 ```
 pip install -r requirements.txt
 ```
