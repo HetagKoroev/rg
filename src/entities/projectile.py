@@ -14,7 +14,6 @@ class Projectile(pygame.sprite.Sprite):
             (self.rect.width // 2, self.rect.height // 2),
             self.rect.width // 2
         )
-
         self.pos = [source[0], source[1]]
         self.movement_vector = [target[0], target[1]]
         self.speed = speed
