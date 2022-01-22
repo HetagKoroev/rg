@@ -3,9 +3,9 @@ import sys
 
 import pygame
 
-from settings import SCREEN_SIZE, WIDTH, HEIGHT
-from entities.enemy import Enemy
-from entities.player import Player
+from entities.characters.enemies import Enemy
+from entities.characters.player import Player
+from settings import HEIGHT, SCREEN_SIZE, WIDTH, FPS
 
 pygame.init()
 
@@ -72,7 +72,7 @@ def process_mouse(mouse, hero):
         hero.sprite.shoot(pygame.mouse.get_pos())
 
 
-def game_loop():
+def run_game():
     hero = pygame.sprite.GroupSingle(Player(screen.get_size()))
     enemies = pygame.sprite.Group()
     last_enemy = pygame.time.get_ticks()
@@ -85,7 +85,8 @@ def game_loop():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT or not hero.sprite.alive:
-                return
+                pygame.quit()
+                sys.exit()
 
         screen.fill(pygame.Color('white'))
 
@@ -121,11 +122,9 @@ def game_loop():
         score_rect.top = 20
         screen.blit(score_render, score_rect)
 
-        pygame.display.flip()
-        clock.tick(120)
+        pygame.display.update()
+        clock.tick(FPS)
 
 
 if __name__ == '__main__':
-    game_loop()
-    pygame.quit()
-    sys.exit()
+    run_game()

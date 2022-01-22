@@ -1,6 +1,6 @@
 import math
 import random
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 import pygame
 

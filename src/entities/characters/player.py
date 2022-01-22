@@ -2,7 +2,7 @@ import math
 
 import pygame
 
-from entities.weapon import Weapon, Pistol, Shotgun, MachineGun
+from entities.weapons import MachineGun, Pistol, Shotgun, Weapon
 
 
 def normalize_vector(vector):
