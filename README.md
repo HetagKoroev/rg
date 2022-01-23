@@ -23,6 +23,7 @@ pip install -r requirements.txt
 ```
 python3.10 main.py
 ```
+
 ### Управление
 - `WASD` перемещение
 - `ЛКМ` стрельба
