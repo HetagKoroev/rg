@@ -9,10 +9,10 @@
 # создание виртуального окружения
 python3.10 -m venv venv
 
-# активация виртуального окружения для Linux и MacOS
+# активация виртуального окружения для Linux и MacOS...
 source venv/bin/activate
 
-# активация виртуального окружения для Windows
+# ...для Windows
 venv\Scripts\activate.bat
 ```
 3. Устанавливаем зависимости
